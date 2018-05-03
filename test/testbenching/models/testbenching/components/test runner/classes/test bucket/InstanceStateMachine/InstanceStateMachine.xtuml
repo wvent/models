@@ -476,6 +476,7 @@ INSERT INTO SM_ACT
 	'select one test_case related by self->SEQ_TESTCASE[R3.''is current''];
 test_case.timed_out = true;
 LOG::LogInfo( message:"+++ testcase timed out +++" );
+ARCH::shutdown();
   
 
 ',
@@ -541,7 +542,8 @@ while ( not_empty test_case )
   LOG::LogInfo( message:test_case.label );  
   select one test_case related by test_case->SEQ_TESTCASE[R1.''follows''];
 end while;
-LOG::LogInfo( message:"bucket done" );',
+LOG::LogInfo( message:"bucket done" );
+ARCH::shutdown();',
 	'',
 	0);
 INSERT INTO SM_TAH
