@@ -476,8 +476,9 @@ INSERT INTO SM_ACT
 	'select one test_case related by self->SEQ_TESTCASE[R3.''is current''];
 test_case.timed_out = true;
 LOG::LogInfo( message:"+++ testcase timed out +++" );
+
+// Stop to ensure it is clear to the user when the bucket has finished.
 ARCH::shutdown();
-  
 
 ',
 	'',
@@ -544,13 +545,8 @@ while ( not_empty test_case )
 end while;
 LOG::LogInfo( message:"bucket done" );
 
-// Ordinarily, this would be an invocation of ARCH::shutdown(), but
-// Verifier does not react well to such an invocation when the ARCH EE
-// resides in another project, and in this case, it does, so that it 
-// can be maintained in a single place and used by multiple projects.
-// The line below does precisely the same thing as ARCH::shutdown()
-// for both Verifier and generated code.
-control stop;',
+// Stop to ensure it is clear to the user when the bucket has finished.
+ARCH::shutdown();',
 	'',
 	0);
 INSERT INTO SM_TAH
